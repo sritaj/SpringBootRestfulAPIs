@@ -1,12 +1,11 @@
 package com.example.controller;
 
 import com.example.entity.Student;
+import com.example.request.CreateRequestStudent;
 import com.example.response.StudentResponse;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping("/getAll")
+    @GetMapping("getAll")
     public List<StudentResponse> getAllStudents(){
 
         List<Student> studentList =  studentService.getAllStudents();
@@ -26,4 +25,11 @@ public class StudentController {
         studentList.forEach(student->studentResponseList.add(new StudentResponse(student)));
         return studentResponseList;
     }
+
+    @PostMapping("create")
+    public StudentResponse createStudent(@RequestBody CreateRequestStudent createRequestStudent) {
+        Student student =  studentService.createStudent(createRequestStudent);
+        return new StudentResponse(student);
+    }
+
 }
