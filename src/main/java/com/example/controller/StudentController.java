@@ -7,6 +7,7 @@ import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class StudentController {
     }
 
     @PostMapping("create")
-    public StudentResponse createStudent(@RequestBody CreateRequestStudent createRequestStudent) {
+    public StudentResponse createStudent(@Valid @RequestBody CreateRequestStudent createRequestStudent) {
         Student student =  studentService.createStudent(createRequestStudent);
         return new StudentResponse(student);
     }
