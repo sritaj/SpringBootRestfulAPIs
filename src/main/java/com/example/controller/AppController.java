@@ -13,7 +13,7 @@ public class AppController {
     private String appName;
 
     @GetMapping("/")
-    public String getAppName(){
+    public String getAppName() {
         return appName;
     }
 }
