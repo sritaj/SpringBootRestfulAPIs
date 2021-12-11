@@ -1,6 +1,7 @@
 package com.example.entity;
 
 
+import com.example.request.CreateRequestStudent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import javax.persistence.*;
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
@@ -29,4 +30,10 @@ public class Student {
 
     @Column(name = "email")
     private String email;
+
+    public Student(CreateRequestStudent createRequestStudent){
+        this.firstName = createRequestStudent.getFirstName();
+        this.lastName = createRequestStudent.getLastName();
+        this.email = createRequestStudent.getEmaii();
+    }
 }
