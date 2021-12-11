@@ -16,5 +16,5 @@ public class CreateRequestStudent {
 
     private String lastName;
 
-    private String emaii;
+    private String email;
 }
