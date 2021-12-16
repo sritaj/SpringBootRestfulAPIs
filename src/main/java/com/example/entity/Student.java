@@ -31,9 +31,13 @@ public class Student {
     @Column(name = "email")
     private String email;
 
+    @Transient
+    private String fullName;
+
     public Student(CreateRequestStudent createRequestStudent){
         this.firstName = createRequestStudent.getFirstName();
         this.lastName = createRequestStudent.getLastName();
         this.email = createRequestStudent.getEmail();
+        this.fullName = createRequestStudent.getFirstName() + " " + createRequestStudent.getLastName();
     }
 }
