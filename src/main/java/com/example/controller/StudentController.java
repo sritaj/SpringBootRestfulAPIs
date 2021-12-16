@@ -119,4 +119,13 @@ public class StudentController {
         studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
         return studentResponseList;
     }
+
+    @GetMapping("endsWith/{firstName}")
+    public List<StudentResponse> endsWith(@PathVariable String firstName){
+        List<Student> studentList = studentService.endsWith(firstName);
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
 }
