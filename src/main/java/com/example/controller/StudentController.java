@@ -83,4 +83,13 @@ public class StudentController {
         return studentResponseList;
 
     }
+
+    @GetMapping("gellAllWithPagination")
+    public List<StudentResponse> getAllStudentsWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
+        List<Student> studentList = studentService.getAllStudentsWithPagination(pageNo, pageSize);
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
 }
