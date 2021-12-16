@@ -19,52 +19,56 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
-    public Student createStudent(CreateRequestStudent createRequestStudent){
+    public Student createStudent(CreateRequestStudent createRequestStudent) {
         Student student = new Student(createRequestStudent);
         return studentRepository.save(student);
     }
 
-    public Student updateStudent(UpdateStudentRequest updateStudentRequest){
+    public Student updateStudent(UpdateStudentRequest updateStudentRequest) {
         Student student = studentRepository.findById(updateStudentRequest.getId()).get();
 
-        if(updateStudentRequest.getFirstName()!=null && !updateStudentRequest.getFirstName().isEmpty()){
+        if (updateStudentRequest.getFirstName() != null && !updateStudentRequest.getFirstName().isEmpty()) {
             student.setFirstName(updateStudentRequest.getFirstName());
         }
         return studentRepository.save(student);
     }
 
-    public String deleteStudent(long id){
+    public String deleteStudent(long id) {
         studentRepository.deleteById(id);
         return "Student has been deleted successfully";
     }
 
-    public List<Student> getByFirstName (String firstName){
+    public List<Student> getByFirstName(String firstName) {
         return studentRepository.findByFirstName(firstName);
     }
 
-    public Student getByFirstNameAndLastName (String firstName, String lastName){
+    public Student getByFirstNameAndLastName(String firstName, String lastName) {
         return studentRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 
-    public List<Student> getByFirstNameOrLastName (String firstName, String lastName){
+    public List<Student> getByFirstNameOrLastName(String firstName, String lastName) {
         return studentRepository.findByFirstNameOrLastName(firstName, lastName);
     }
 
-    public List<Student> getByFirstNameIn (InQueryRequest inQueryRequest){
+    public List<Student> getByFirstNameIn(InQueryRequest inQueryRequest) {
         return studentRepository.findByFirstNameIn(inQueryRequest.getFirstNames());
     }
 
-    public List<Student> getAllStudentsWithPagination (int pageNo, int pageSize){
-        Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+    public List<Student> getAllStudentsWithPagination(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return studentRepository.findAll(pageable).getContent();
     }
 
-    public List<Student> getAllStudentsWithSorting (){
+    public List<Student> getAllStudentsWithSorting() {
         Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
         return studentRepository.findAll(sort);
+    }
+
+    public List<Student> like(String firstName) {
+        return studentRepository.findByFirstNameContains(firstName);
     }
 }

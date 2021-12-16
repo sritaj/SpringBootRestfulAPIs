@@ -101,4 +101,13 @@ public class StudentController {
         studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
         return studentResponseList;
     }
+
+    @GetMapping("like/{firstName}")
+    public List<StudentResponse> like(@PathVariable String firstName){
+        List<Student> studentList = studentService.like(firstName);
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
 }
