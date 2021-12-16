@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.entity.Student;
 import com.example.repository.StudentRepository;
 import com.example.request.CreateRequestStudent;
+import com.example.request.InQueryRequest;
 import com.example.request.UpdateStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,9 @@ public class StudentService {
 
     public List<Student> getByFirstNameOrLastName (String firstName, String lastName){
         return studentRepository.findByFirstNameOrLastName(firstName, lastName);
+    }
+
+    public List<Student> getByFirstNameIn (InQueryRequest inQueryRequest){
+        return studentRepository.findByFirstNameIn(inQueryRequest.getFirstNames());
     }
 }
