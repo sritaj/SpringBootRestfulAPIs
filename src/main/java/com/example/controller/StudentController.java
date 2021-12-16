@@ -20,34 +20,48 @@ public class StudentController {
     StudentService studentService;
 
     @GetMapping("getAll")
-    public List<StudentResponse> getAllStudents(){
+    public List<StudentResponse> getAllStudents() {
 
-        List<Student> studentList =  studentService.getAllStudents();
+        List<Student> studentList = studentService.getAllStudents();
         List<StudentResponse> studentResponseList = new ArrayList<>();
-        studentList.forEach(student->studentResponseList.add(new StudentResponse(student)));
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
         return studentResponseList;
     }
 
     @PostMapping("create")
     public StudentResponse createStudent(@Valid @RequestBody CreateRequestStudent createRequestStudent) {
-        Student student =  studentService.createStudent(createRequestStudent);
+        Student student = studentService.createStudent(createRequestStudent);
         return new StudentResponse(student);
     }
 
     @PutMapping("update")
     public StudentResponse updateStudent(@Valid @RequestBody UpdateStudentRequest updateStudentRequest) {
-        Student student =  studentService.updateStudent(updateStudentRequest);
+        Student student = studentService.updateStudent(updateStudentRequest);
         return new StudentResponse(student);
     }
 
     @DeleteMapping("delete")
-    public String deleteStudent(@RequestParam long id){
+    public String deleteStudent(@RequestParam long id) {
         return studentService.deleteStudent(id);
     }
 
     @DeleteMapping("deleteStudent/{id}")
-    public String deleteSpecifiedStudent(@PathVariable long id){
+    public String deleteSpecifiedStudent(@PathVariable long id) {
         return studentService.deleteStudent(id);
+    }
+
+    @GetMapping("getByFirstName/{firstName}")
+    public List<StudentResponse> getByFirstName(@PathVariable String firstName){
+        List<Student> studentList = studentService.getByFirstName(firstName);
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
+
+    @GetMapping("getByFirstNameAndLastName/{firstName}/{lastName}")
+    public StudentResponse getByFirstName(@PathVariable String firstName, @PathVariable String lastName){
+        return new StudentResponse(studentService.getByFirstNameAndLastName(firstName, lastName));
     }
 
 }
