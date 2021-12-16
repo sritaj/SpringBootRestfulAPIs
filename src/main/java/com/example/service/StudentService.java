@@ -73,6 +73,6 @@ public class StudentService {
     }
 
     public List<Student> startWiths(String firstName) {
-        return studentRepository.findByFirstNameContains(firstName);
+        return studentRepository.findByFirstNameStartsWith(firstName);
     }
 }
