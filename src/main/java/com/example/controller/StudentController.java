@@ -92,4 +92,13 @@ public class StudentController {
         studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
         return studentResponseList;
     }
+
+    @GetMapping("getAllWithSorting")
+    public List<StudentResponse> getAllStudentsWithSorting(){
+        List<Student> studentList = studentService.getAllStudentsWithSorting();
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
 }
