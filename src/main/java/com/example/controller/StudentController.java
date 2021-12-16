@@ -60,8 +60,17 @@ public class StudentController {
     }
 
     @GetMapping("getByFirstNameAndLastName/{firstName}/{lastName}")
-    public StudentResponse getByFirstName(@PathVariable String firstName, @PathVariable String lastName){
+    public StudentResponse getByFirstNameAndLastName(@PathVariable String firstName, @PathVariable String lastName){
         return new StudentResponse(studentService.getByFirstNameAndLastName(firstName, lastName));
+    }
+
+    @GetMapping("getByFirstNameORLastName/{firstName}/{lastName}")
+    public List<StudentResponse> getByFirstNameORLastName(@PathVariable String firstName, @PathVariable String lastName){
+        List<Student> studentList = studentService.getByFirstNameOrLastName(firstName, lastName);
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
     }
 
 }
