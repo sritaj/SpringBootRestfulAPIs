@@ -83,4 +83,8 @@ public class StudentService {
     public Student getStudentByFirstNameAndLastName(String firstName, String lastName) {
         return studentRepository.findStudentByFirstNameAndLastName(firstName, lastName);
     }
+
+    public Integer updateStudentFirstName(Long id, String firstName) {
+        return studentRepository.updateStudent(id, firstName);
+    }
 }

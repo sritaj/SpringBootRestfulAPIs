@@ -133,4 +133,9 @@ public class StudentController {
     public StudentResponse getStudentByFirstNameAndLastName(@PathVariable String firstName, @PathVariable String lastName){
         return new StudentResponse(studentService.getStudentByFirstNameAndLastName(firstName, lastName));
     }
+
+    @PutMapping("updateStudentFirstName/{id}/{firstName}")
+    public String updateStudentFirstName(@PathVariable Long id, @PathVariable String firstName){
+        return studentService.updateStudentFirstName(id, firstName) + " Student(s) updated";
+    }
 }

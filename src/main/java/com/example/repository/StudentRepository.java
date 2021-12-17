@@ -2,8 +2,10 @@ package com.example.repository;
 
 import com.example.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,4 +28,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query("From Student where firstName = :firstName and lastName = :lastName")
     Student findStudentByFirstNameAndLastName(String firstName, String lastName);
+
+    @Modifying
+    @Transactional
+    @Query("Update Student set firstName = :firstName where id = :id")
+    Integer updateStudent(Long id, String firstName);
 }
