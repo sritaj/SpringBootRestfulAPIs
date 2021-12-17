@@ -87,4 +87,8 @@ public class StudentService {
     public Integer updateStudentFirstName(Long id, String firstName) {
         return studentRepository.updateStudent(id, firstName);
     }
+
+    public Integer deleteStudent(String firstName){
+        return studentRepository.deleteStudent(firstName);
+    }
 }

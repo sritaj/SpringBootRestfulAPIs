@@ -138,4 +138,9 @@ public class StudentController {
     public String updateStudentFirstName(@PathVariable Long id, @PathVariable String firstName){
         return studentService.updateStudentFirstName(id, firstName) + " Student(s) updated";
     }
+
+    @DeleteMapping("deleteByFirstName/{firstName}")
+    public String deleteStudent(@PathVariable String firstName){
+        return studentService.deleteStudent(firstName) + " Student(s) deleted";
+    }
 }
