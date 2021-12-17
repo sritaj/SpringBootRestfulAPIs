@@ -2,6 +2,7 @@ package com.example.repository;
 
 import com.example.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findByFirstNameStartsWith(String firstName);
 
     List<Student> findByFirstNameEndsWith(String firstName);
+
+    @Query("From Student where firstName = :firstName and lastName = :lastName")
+    Student findStudentByFirstNameAndLastName(String firstName, String lastName);
 }

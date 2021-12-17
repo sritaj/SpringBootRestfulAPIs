@@ -79,4 +79,8 @@ public class StudentService {
     public List<Student> endsWith(String firstName) {
         return studentRepository.findByFirstNameEndsWith(firstName);
     }
+
+    public Student getStudentByFirstNameAndLastName(String firstName, String lastName) {
+        return studentRepository.findStudentByFirstNameAndLastName(firstName, lastName);
+    }
 }
