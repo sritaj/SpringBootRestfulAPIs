@@ -34,6 +34,10 @@ public class Student {
     @Transient
     private String fullName;
 
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
     public Student(CreateRequestStudent createRequestStudent){
         this.firstName = createRequestStudent.getFirstName();
         this.lastName = createRequestStudent.getLastName();
