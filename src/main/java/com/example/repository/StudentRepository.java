@@ -41,4 +41,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Integer deleteStudent(String firstName);
 
     List<Student> findByAddressCity(String city);
+
+    @Query("From Student where address.city = :city")
+    List<Student> getStudentByCity(String city);
 }

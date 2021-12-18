@@ -152,4 +152,13 @@ public class StudentController {
         studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
         return studentResponseList;
     }
+
+    @GetMapping("getStudentByCity/{city}")
+    public List<StudentResponse> getStudentByCityUsingJPQL(@PathVariable String city){
+        List<Student> studentList = studentService.getStudentByCityUsingJPQL(city);
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
 }

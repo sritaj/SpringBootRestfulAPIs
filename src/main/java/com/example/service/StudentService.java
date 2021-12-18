@@ -106,4 +106,8 @@ public class StudentService {
     public List<Student> getStudentByCity(String city){
         return studentRepository.findByAddressCity(city);
     }
+
+    public List<Student> getStudentByCityUsingJPQL(String city){
+        return studentRepository.getStudentByCity(city);
+    }
 }
