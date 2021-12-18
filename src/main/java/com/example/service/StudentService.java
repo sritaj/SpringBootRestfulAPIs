@@ -2,9 +2,12 @@ package com.example.service;
 
 import com.example.entity.Address;
 import com.example.entity.Student;
+import com.example.entity.Subject;
 import com.example.repository.AddressRepository;
 import com.example.repository.StudentRepository;
+import com.example.repository.SubjectRepository;
 import com.example.request.CreateRequestStudent;
+import com.example.request.CreateSubjectRequest;
 import com.example.request.InQueryRequest;
 import com.example.request.UpdateStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +27,9 @@ public class StudentService {
 
     @Autowired
     AddressRepository addressRepository;
+
+    @Autowired
+    SubjectRepository subjectRepository;
 
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
@@ -36,7 +43,24 @@ public class StudentService {
         address = addressRepository.save(address);
 
         student.setAddress(address);
-        return studentRepository.save(student);
+        student =  studentRepository.save(student);
+
+        List<Subject> subjectList = new ArrayList<>();
+
+        if(createRequestStudent.getLearningSubjects()!=null){
+            for(CreateSubjectRequest createSubjectRequest : createRequestStudent.getLearningSubjects()){
+                Subject subject = new Subject();
+                subject.setSubjectName(createSubjectRequest.getSubjectName());
+                subject.setMarksObtained(createSubjectRequest.getMarksObtained());
+                subject.setStudent(student);
+
+                subjectList.add(subject);
+
+            }
+            subjectRepository.saveAll(subjectList);
+        }
+        student.setLearningSubjects(subjectList);
+        return student;
     }
 
     public Student updateStudent(UpdateStudentRequest updateStudentRequest) {
