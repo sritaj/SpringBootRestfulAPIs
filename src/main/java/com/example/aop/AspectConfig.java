@@ -13,8 +13,15 @@ public class AspectConfig {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Before(value = "execution(* com.example.controller.*.*(..))")
-    public void beforeAdvice(JoinPoint joinPoint){
-        logger.info("Inside - Before Advice");
+//    @Before(value = "execution(* com.example.controller.*.*(..))")
+//    public void beforeAdvice(JoinPoint joinPoint){
+//        logger.info("Inside - Before Advice");
+//    }
+
+    @Before(value = "execution(* com.example.controller.*.*(..)) and args(Object)")
+    public void beforeAdviceWithOneParameter(JoinPoint joinPoint, Object object){
+        logger.info("Request = : " + object);
     }
+
+
 }
