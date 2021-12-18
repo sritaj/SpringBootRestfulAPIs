@@ -1,6 +1,8 @@
 package com.example.service;
 
+import com.example.entity.Address;
 import com.example.entity.Student;
+import com.example.repository.AddressRepository;
 import com.example.repository.StudentRepository;
 import com.example.request.CreateRequestStudent;
 import com.example.request.InQueryRequest;
@@ -19,12 +21,21 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    AddressRepository addressRepository;
+
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
     public Student createStudent(CreateRequestStudent createRequestStudent) {
         Student student = new Student(createRequestStudent);
+        Address address = new Address();
+        address.setStreet(createRequestStudent.getStreet());
+        address.setCity(createRequestStudent.getCity());
+        address = addressRepository.save(address);
+
+        student.setAddress(address);
         return studentRepository.save(student);
     }
 
