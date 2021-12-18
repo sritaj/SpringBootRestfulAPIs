@@ -102,4 +102,8 @@ public class StudentService {
     public Integer deleteStudent(String firstName){
         return studentRepository.deleteStudent(firstName);
     }
+
+    public List<Student> getStudentByCity(String city){
+        return studentRepository.findByAddressCity(city);
+    }
 }

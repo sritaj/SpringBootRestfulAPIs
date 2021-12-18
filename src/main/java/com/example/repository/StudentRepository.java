@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.entity.Address;
 import com.example.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -38,4 +39,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Transactional
     @Query("Delete From Student where firstName = :firstName")
     Integer deleteStudent(String firstName);
+
+    List<Student> findByAddressCity(String city);
 }

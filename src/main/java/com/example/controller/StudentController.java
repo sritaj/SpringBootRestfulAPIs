@@ -143,4 +143,13 @@ public class StudentController {
     public String deleteStudent(@PathVariable String firstName){
         return studentService.deleteStudent(firstName) + " Student(s) deleted";
     }
+
+    @GetMapping("getByCity/{city}")
+    public List<StudentResponse> getStudentByCity(@PathVariable String city){
+        List<Student> studentList = studentService.getStudentByCity(city);
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
 }
